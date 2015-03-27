@@ -1,3 +1,4 @@
+%TODO
 a = rand(12, 1);
 nonlcon(a)
 % save(strcat('req_coeff-', datestr(now, 30), '.dat'), 'req_coeff');
