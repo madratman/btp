@@ -55,26 +55,24 @@ X;
 %the nonlcon function, i.e. req_coeff. 
 c = [];
 
-% for i = 1:4,
-global interp_a13 interp_a23 interp_a33 interp_a43;
+global interp_aj3;
 
-i = 2;
-    for u=t0:t_f,
+for u=t0:t_f,
+	for i = 1:4,
     	x_curr = double(subs(x, t, u));
     	y_curr = double(subs(y, t, u));
     	if (x_curr >= 0) && (x_curr <= 10) && (y_curr >= 0) && (y_curr <= 10)
 	    	alpha_curr = double(subs(alpha, t, u));
-    		aj3_curr = interp_a23(x_curr, y_curr, alpha_curr);
-	        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; -aj3_curr];   % multiply by -1 coz c<0
+    		aj3_curr = interp_aj3{i}(x_curr, y_curr, alpha_curr);
 	   	else
     		aj3_curr = 0;
         end
-        c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10; aj3_curr];   % multiply by -1 coz c<0
+        c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10; -aj3_curr];   % multiply by -1 coz c<0
     	% aj3_curr = double(subs(-1*(b2 + LW*tanh(b1+IW*X)), t, u));
         % double(subs(X, t, u))
     end
+end
 c, size(c)
-% % end
 % %make x y and alpha as anon func?
 % %Anonymous functions return just one output.
 % % So how can you write an anonymous function as a nonlinear constraint?
