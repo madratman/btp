@@ -48,19 +48,26 @@ X;
 c = [];
 
 % for i = 1:4,
+global interp_a13;
+global interp_a23;
+global interp_a33;
+global interp_a43;
+
 i = 2;
-    weights = importdata(strcat('weights', int2str(i), '.dat'));
-    b2 = weights.b{2};
-    b1 = weights.b{1};
-    IW = weights.IW{1};
-    LW = weights.LW{2};
     for u=t0:t_f,
     	x_curr = double(subs(x, t, u));
     	y_curr = double(subs(y, t, u));
-    	aj3_curr = double(subs(-1*(b2 + LW*tanh(b1+IW*X)), t, u));
-        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; aj3_curr];   % multiply by -1 coz c<0
+    	if (x_curr >= 0) && (x_curr <= 10) && (y_curr >= 0) && (y_curr <= 10)
+	    	alpha_curr = double(subs(alpha, t, u));
+    		aj3_curr = interp_a23(x_curr, y_curr, alpha_curr);
+	        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; aj3_curr];   % multiply by -1 coz c<0
+	   	else
+	        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1];   % multiply by -1 coz c<0
+        end
+    	% aj3_curr = double(subs(-1*(b2 + LW*tanh(b1+IW*X)), t, u));
         % double(subs(X, t, u))
     end
+c
 % % end
 % %make x y and alpha as anon func?
 % %Anonymous functions return just one output.
@@ -69,7 +76,7 @@ i = 2;
 
 % c = [];
 xinitial = 0;
-xfinal = 1;
+xfinal = 10;
 yinitial = 0;
 yfinal = 1;
 % i = 1
@@ -90,7 +97,7 @@ yfinal = 1;
 % %coeffa0*k0;
 % %coeffa1*k1;
 % % subs(y, t, t0);
-ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial);  double(subs(y, t, t_f) - yfinal)]
+ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial)]
 % % 
 % %  x
 % %  y
