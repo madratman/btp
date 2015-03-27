@@ -5,7 +5,7 @@ function [c,ceq] = nonlcon(req_coeff);
       
 %   X = [ 1     1     1 ];
 %a13 = b2 + LW*tanh(b1+IW*X);
-req_coeff
+req_coeff;
 t0 = 1;
 t_f = 10;
 syms t
@@ -47,21 +47,82 @@ X;
 %the nonlcon function, i.e. req_coeff. 
 c = [];
 
-% for i = 1:4,
-i = 2;
-    weights = importdata(strcat('weights', int2str(i), '.dat'));
-    b2 = weights.b{2};
-    b1 = weights.b{1};
-    IW = weights.IW{1};
-    LW = weights.LW{2};
-    for u=t0:t_f,
-    	x_curr = double(subs(x, t, u));
+%  for i = 1:4,
+% %i = 1;
+%     weights = importdata(strcat('weights', int2str(i), '.dat'));
+%     b2 = weights.b{2};
+%     b1 = weights.b{1};
+%     IW = weights.IW{1};
+%     LW = weights.LW{2};
+%     for u=t0:t_f,
+%     	x_curr = double(subs(x, t, u));
+%     	y_curr = double(subs(y, t, u));
+%       alpha_curr = double(subs(alpha, t, u));
+%     	aj3_curr = double(subs(-1*(b2 + LW*tanh(b1+IW*X)), t, u));
+%       c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; aj3_curr];   % multiply by -1 coz c<0
+%       double(subs(X, t, u))
+%   end
+% c
+% end
+ 
+%screw you nn. we are going to interpolate. 
+% 
+% data = importdata('csv_26_03_2015.mat');
+% inputs = data.inputs;
+% x_data = inputs(:,1);
+% y_data = inputs(:,2);
+% alpha_data = inputs(:,3);
+% a13_data = data.a13;
+
+
+%for i = 1:4
+%     for u=t0:t_f
+%         x_curr = double(subs(x, t, u));
+%     	  y_curr = double(subs(y, t, u));
+%         alpha_curr = double(subs(alpha, t, u));
+%         aj3_curr = interpn( x_data, y_data, alpha_data , a13_data , x_curr, y_curr , alpha_curr);
+%         c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; aj3_curr];   % multiply by -1 coz c<0
+%     end
+%end
+ %the above requires monotonic increasing vectors. screw you too.
+ 
+ 
+data = importdata('csv_26_03_2015.mat');
+a13 = data.a13;
+a23 = data.a23;
+a33 = data.a33;
+a43 = data.a43;
+
+[A_cube,Y_cube,X_cube] = ndgrid(0:0.1:10,0:0.1:10, -3.14:0.0628:3.14);
+a13_cube = reshape(a13, 101, 101, 101);
+a23_cube = reshape(a23, 101, 101, 101);
+a33_cube = reshape(a33, 101, 101, 101);
+a43_cube = reshape(a43, 101, 101, 101);
+a13_ip = griddedInterpolant(A_cube, Y_cube, X_cube, a13_cube,'linear');
+a23_ip = griddedInterpolant(A_cube, Y_cube, X_cube, a13_cube,'linear');
+a33_ip = griddedInterpolant(A_cube, Y_cube, X_cube, a13_cube,'linear');
+a43_ip = griddedInterpolant(A_cube, Y_cube, X_cube, a13_cube,'linear');
+F ={a13_ip, a23_ip, a33_ip, a43_ip}
+
+for i = 1:4
+    for u=t0:t_f
+        x_curr = double(subs(x, t, u));
     	y_curr = double(subs(y, t, u));
-    	aj3_curr = double(subs(-1*(b2 + LW*tanh(b1+IW*X)), t, u));
-        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; aj3_curr];   % multiply by -1 coz c<0
-        % double(subs(X, t, u))
+        G = F{i};
+        if(x_curr <= 10) && (x_curr >= 0)&& (y_curr <= 10) && (y_curr >=0 )    
+            alpha_curr = double(subs(alpha, t, u));
+            aj3_curr = G(alpha_curr, y_curr , x_curr);
+            c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; -aj3_curr];   % multiply by -1 coz c<0
+        else
+            c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1];
+        end
     end
-% % end
+end
+
+ 
+c
+
+
 % %make x y and alpha as anon func?
 % %Anonymous functions return just one output.
 % % So how can you write an anonymous function as a nonlinear constraint?
@@ -69,9 +130,9 @@ i = 2;
 
 % c = [];
 xinitial = 0;
-xfinal = 1;
+xfinal = 10;
 yinitial = 0;
-yfinal = 1;
+yfinal = 10;
 % i = 1
 % weights = importdata(strcat('weights', int2str(i), '.dat'));
 %     b2 = weights.b{2};
