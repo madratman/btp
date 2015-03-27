@@ -60,7 +60,7 @@ i = 2;
     	if (x_curr >= 0) && (x_curr <= 10) && (y_curr >= 0) && (y_curr <= 10)
 	    	alpha_curr = double(subs(alpha, t, u));
     		aj3_curr = interp_a23(x_curr, y_curr, alpha_curr);
-	        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; aj3_curr];   % multiply by -1 coz c<0
+	        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; -aj3_curr];   % multiply by -1 coz c<0
 	   	else
 	        c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1];   % multiply by -1 coz c<0
         end
