@@ -105,17 +105,20 @@ a43_ip = griddedInterpolant(A_cube, Y_cube, X_cube, a13_cube,'linear');
 F ={a13_ip, a23_ip, a33_ip, a43_ip}
 
 for i = 1:4
+%     G = F{i};
     for u=t0:t_f
         x_curr = double(subs(x, t, u));
     	y_curr = double(subs(y, t, u));
-        G = F{i};
-        if(x_curr <= 10) && (x_curr >= 0)&& (y_curr <= 10) && (y_curr >=0 )    
+        if(x_curr <= 10) && (x_curr >= 0)&& (y_curr <= 10) && (y_curr >=0)    
             alpha_curr = double(subs(alpha, t, u));
-            aj3_curr = G(alpha_curr, y_curr , x_curr);
-            c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1; -aj3_curr];   % multiply by -1 coz c<0
+            aj3_curr = F{i}(x_curr, y_curr, alpha_curr);
+%             c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10; -a13_curr; -a23_curr; -a33_curr; -a43_curr];   % multiply by -1 coz c<0
         else
-            c = [c; -x_curr; -y_curr; x_curr - 1; y_curr - 1];
+            aj3_curr = 0;
+%             c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10];
         end
+        c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10; -aj3_curr];   % multiply by -1 coz c<0
+
     end
 end
 
