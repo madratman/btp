@@ -12,6 +12,7 @@ function interpolant = create_interpolant(j);
 	% y = y(1:ceil(initial_step/final_step):end);
 	[x, y, alpha] = ndgrid([0:0.1:10], [0:0.1:10], [-3.14:0.0628:3.14]);
 	aj3 = reshape(data(:, 4+j), [101, 101, 101]);
+	aj3 = permute(aj3, [3 2 1]);
 	% size(x)
 	% size(y)
 	% size(alpha)

@@ -71,7 +71,6 @@ for u=t0:t_f,
     end
     c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10;];   % multiply by -1 coz c<0
 end
-c, size(c)
 % %make x y and alpha as anon func?
 % %Anonymous functions return just one output.
 % % So how can you write an anonymous function as a nonlinear constraint?
@@ -81,7 +80,7 @@ c, size(c)
 xinitial = 0;
 xfinal = 10;
 yinitial = 0;
-yfinal = 1;
+yfinal = 10;
 % i = 1
 % weights = importdata(strcat('weights', int2str(i), '.dat'));
 %     b2 = weights.b{2};
@@ -100,7 +99,7 @@ yfinal = 1;
 % %coeffa0*k0;
 % %coeffa1*k1;
 % % subs(y, t, t0);
-ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial)]
+ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial); double(subs(y, t, t_f) - yfinal)]
 % % 
 % %  x
 % %  y
