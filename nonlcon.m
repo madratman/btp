@@ -5,7 +5,7 @@ function [c,ceq] = nonlcon(req_coeff);
       
 %   X = [ 1     1     1 ];
 %a13 = b2 + LW*tanh(b1+IW*X);
-req_coeff
+req_coeff;
 t0 = 1;
 t_f = 10;
 syms t
@@ -20,7 +20,6 @@ B5 = (t - t0)^5/(-t0 + t_f)^5;
 pCell = num2cell(req_coeff);
 [x0,x1,x2,x3,x4,x5,k0,k1,k2,k3,k4,k5] = pCell{:};
 %just to make it readable
-
 
 x = B0*x0 + B1*x1 + B2*x2 + B3*x3 + B4*x4 + B5*x5;
 k = B0*k0 + B1*k1 + B2*k2 + B3*k3 + B4*k4 + B5*k5;
@@ -45,74 +44,81 @@ coeffa2 = subs(coeffa2, [X0, X1, X2, X3, X4, X5], [x0, x1, x2, x3, x4, x5]);
 coeffa3 = subs(coeffa3, [X0, X1, X2, X3, X4, X5], [x0, x1, x2, x3, x4, x5]);
 coeffa4 = subs(coeffa4, [X0, X1, X2, X3, X4, X5], [x0, x1, x2, x3, x4, x5]);
 coeffa5 = subs(coeffa5, [X0, X1, X2, X3, X4, X5], [x0, x1, x2, x3, x4, x5]);
-
+% coeffa1, coeffa2, coeffa3, coeffa4, coeffa5;
 y = coeffa0*k0 + coeffa1*k1 + coeffa2*k2 + coeffa3*k3 + coeffa4*k4 + coeffa5*k5;
+A1_plot = 3.5*0.50;
+a1_plot = 0.50;
+B1_plot = 3.5*0.50;
+b1_plot = 0.50;
+% x
 y
 x
-X = [x; y; alpha];
-X;
-%what follows is wrong! :\. c is to be in terms of the input parameters of
-%the nonlcon function, i.e. req_coeff. 
-c = [];
-
-global interp_aj3;
-
-for u=t0:t_f,
-	x_curr = double(subs(x, t, u));
-	y_curr = double(subs(y, t, u));
-	for i = 1:4,
-    	if (x_curr >= 0) && (x_curr <= 10) && (y_curr >= 0) && (y_curr <= 10)
-	    	alpha_curr = double(subs(alpha, t, u));
-    		aj3_curr = interp_aj3{i}(x_curr, y_curr, alpha_curr);
-	   	else
-    		aj3_curr = 0;
-        end
-        c = [c; -aj3_curr];
-    end
-    c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10;];   % multiply by -1 coz c<0
-end
-% %make x y and alpha as anon func?
-% %Anonymous functions return just one output.
-% % So how can you write an anonymous function as a nonlinear constraint?
-% %The deal function distributes multiple outputs.
-
+Z = A1_plot*sin(a1_plot*x) + B1_plot*cos(b1_plot*y)
+% X = [x; y; alpha];
+% X;
+% %what follows is wrong! :\. c is to be in terms of the input parameters of
+% %the nonlcon function, i.e. req_coeff. 
 % c = [];
-xinitial = 0;
-xfinal = 10;
-yinitial = 0;
-yfinal = 10;
-% i = 1
-% weights = importdata(strcat('weights', int2str(i), '.dat'));
-%     b2 = weights.b{2};
-%     b1 = weights.b{1};
-%     IW = weights.IW{1};
-%     LW = weights.LW{2};
-% for i = xinitial:0.1:xfinal,
-% 	S = double(solve([x == i], [t]));
-% 	double(S(1))
-% 	c_curr = double(subs(-1*(b2 + LW*tanh(b1+IW*X)), t, S(1)));
-% 	c = [c; c_curr];
 
-	% S(S == real(S))
-	% S.t
+% global interp_aj3;
+
+% for u=t0:t_f,
+% 	x_curr = double(subs(x, t, u));
+% 	y_curr = double(subs(y, t, u));
+% 	for i = 1:4,
+%     	if (x_curr >= 0) && (x_curr <= 10) && (y_curr >= 0) && (y_curr <= 10)
+% 	    	alpha_curr = double(subs(alpha, t, u));
+%     		aj3_curr = interp_aj3{i}(x_curr, y_curr, alpha_curr);
+% 	   	else
+%     		aj3_curr = 0;
+%         end
+%         c = [c; -aj3_curr];
+%     end
+%     c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10;];   % multiply by -1 coz c<0
 % end
-% %coeffa0*k0;
-% %coeffa1*k1;
-% % subs(y, t, t0);
-ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial); double(subs(y, t, t_f) - yfinal)]
-% % 
-% %  x
-% %  y
-% % alpha
+% % c
+% % %make x y and alpha as anon func?
+% % %Anonymous functions return just one output.
+% % % So how can you write an anonymous function as a nonlinear constraint?
+% % %The deal function distributes multiple outputs.
 
-% % req_coeff
-% %coeffa0*k0;
-% %coeffa1*k1;
-% % subs(y, t, t0);
-% ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial);  double(subs(y, t, t_f) - yfinal)]
-% % 
-% %  x
-% %  y
-% % alpha
+% % c = [];
+% xinitial = 0;
+% xfinal = 10;
+% yinitial = 0;
+% yfinal = 10;
+% % i = 1
+% % weights = importdata(strcat('weights', int2str(i), '.dat'));
+% %     b2 = weights.b{2};
+% %     b1 = weights.b{1};
+% %     IW = weights.IW{1};
+% %     LW = weights.LW{2};
+% % for i = xinitial:0.1:xfinal,
+% % 	S = double(solve([x == i], [t]));
+% % 	double(S(1))
+% % 	c_curr = double(subs(-1*(b2 + LW*tanh(b1+IW*X)), t, S(1)));
+% % 	c = [c; c_curr];
 
-% % req_coeff'	
+% 	% S(S == real(S))
+% 	% S.t
+% % end
+% % %coeffa0*k0;
+% % %coeffa1*k1;
+% % % subs(y, t, t0);
+% % ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial); double(subs(y, t, t_f) - yfinal)]
+% % % 
+% % %  x
+% % %  y
+% % % alpha
+
+% % % req_coeff
+% % %coeffa0*k0;
+% % %coeffa1*k1;
+% % % subs(y, t, t0);
+% % ceq = [double(subs(x, t, t0) - xinitial);  double(subs(x, t, t_f) - xfinal); double(subs(y, t, t0) - yinitial);  double(subs(y, t, t_f) - yfinal)]
+% % % 
+% % %  x
+% % %  y
+% % % alpha
+
+% % % req_coeff'	
