@@ -15,7 +15,14 @@ global interp_aj3;
 for i = 1:4
 	interp_aj3{i} = importdata(strcat('data/a', int2str(i), '3-interpolant.dat'));
 end
-
+coeff = [coeffa0; coeffa1];
 req_coeff = fmincon(@objective,a,[],[],[],[],[],[],@nonlcon)
 save(strcat('data/req_coeff-', datestr(now, 30), '.dat'), 'req_coeff');
+
+data = importdata('data/x-y.dat');
+x = data(1)
+y = data(2)
+X = [x; y];
+save(strcat('data/x-y-', datestr(now, 30), '.dat'), 'X');
+
 % call results, save plots, (and x, y, alpha, z functions)

@@ -51,6 +51,7 @@ y
 x
 X = [x; y; alpha];
 X;
+save('data/x-y.dat', 'X');
 %what follows is wrong! :\. c is to be in terms of the input parameters of
 %the nonlcon function, i.e. req_coeff. 
 c = [];
