@@ -1,0 +1,35 @@
+A1_plot = 3.5*0.50;
+a1_plot = 1;
+B1_plot = 3.5*0.50;
+b1_plot = 1;
+
+
+
+A1_plot = 3.5*0.50;
+a1_plot = 1;
+B1_plot = 3.5*0.50;
+b1_plot = 0.5;
+
+
+A1_plot = 3.5*0.50;
+a1_plot = 1;
+B1_plot = 2.5*0.50;
+b1_plot = 2.5;
+
+
+
+A1_plot = 3.5*0.50;
+a1_plot = 0.2;
+B1_plot = 0.5*0.50;
+b1_plot = 2.5;
+
+
+A1_plot = 5.5*0.50;
+a1_plot = 0.5;
+B1_plot = 12.5*0.50;
+b1_plot = 0.5;
+
+A1_plot = 3.5*0.50;
+a1_plot = 1;
+B1_plot = 5.5*0.50;
+b1_plot = 0.5;
