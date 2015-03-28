@@ -47,8 +47,8 @@ coeffa4 = subs(coeffa4, [X0, X1, X2, X3, X4, X5], [x0, x1, x2, x3, x4, x5]);
 coeffa5 = subs(coeffa5, [X0, X1, X2, X3, X4, X5], [x0, x1, x2, x3, x4, x5]);
 
 y = coeffa0*k0 + coeffa1*k1 + coeffa2*k2 + coeffa3*k3 + coeffa4*k4 + coeffa5*k5;
-y
-x
+% y
+% x
 X = [x; y; alpha];
 X;
 save('data/x-y.dat', 'X');
