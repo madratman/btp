@@ -18,8 +18,6 @@ for i = 1:5
 	B1 = parameters(i, 3)
 	b1 = parameters(i, 4)
 
-	syms x y;
-	terrain_eqn = A1*cos(a1*x)+B1*sin(b1*y)
-	generate_aj3(terrain_eqn)
+	generate_aj3(A1, a1, B1, b1)
 
 end

@@ -1,4 +1,4 @@
-function [f] = generate_aj3(terrain_eqn)
+function [f] = generate_aj3(A1, a1, B1, b1)
 
 % xt = inp(1);
 % yt = inp(2);
@@ -8,9 +8,9 @@ function [f] = generate_aj3(terrain_eqn)
 xtdot = 1
 syms x y;
 f = [];
-for alphat = -3.14:1.57:3.14
- for xt = 0:1:10
-     for yt = 0:1:10
+for alphat = -3.14:0.0628:3.14
+ for xt = 0:0.1:10
+     for yt = 0:0.1:10
             % for xtdot = -1:0.5:1
 %    f= zeros(4);
 % f = f';
@@ -31,10 +31,10 @@ for alphat = -3.14:1.57:3.14
 % b1 = 0.30;
 % A1sin(a1x) + B1cos(b2x)
 %%%%%%%%%%%%%% surface equation
-A1 = 3.5*0.50;
-a1 = 0.50;
-B1 = 3.5*0.50;
-b1 = 0.50;
+% A1 = 3.5*0.50;
+% a1 = 0.50;
+% B1 = 3.5*0.50;
+% b1 = 0.50;
 
 
 h = 1200/2000;
@@ -48,8 +48,8 @@ l = 0.4;
 % ych = y1;
 
 
-k3 = subs(terrain_eqn, [x, y], [xt, yt]);
-% k3 = A1*cos(a1*xt)+B1*sin(b1*yt)-(-A1*a1*sin(a1*xt)*xt+B1*b1*cos(b1*yt)*yt);
+% k3 = subs(terrain_eqn, [x, y], [xt, yt]);
+k3 = A1*cos(a1*xt)+B1*sin(b1*yt)-(-A1*a1*sin(a1*xt)*xt+B1*b1*cos(b1*yt)*yt);
 % error. This is WRONG (7). k3 = A1*cos(a1*xt)+B1*sin(b1*yt)
 
 k1 = -A1*a1*sin(a1*xt);
@@ -304,7 +304,7 @@ f = [f;g];
         end
  end
 
-csvwrite(strcat('data/csvlist_', datestr(now, 30), '.dat'),f);
+csvwrite(strcat('data/csvlist_', num2str(A1), '-', num2str(a1), '-', num2str(B1), '-', num2str(b1), '-', datestr(now, 30), '.dat'),f);
 % type csvlist.dat;
 
 % final = zeros(max(L),4);
