@@ -1,5 +1,5 @@
 dirs = dir('data/elevation/e*');
-for i = 1:numel(dirs),
+for i = 1:10,
 	directory = dirs(i).name;
 	files = dir(strcat('data/elevation/', directory, '/*dt0'));
 	for j = 1:numel(files),
@@ -11,9 +11,8 @@ for i = 1:numel(dirs),
 		y = 1:size(z, 2);
 		figure
 		surf(x, y, z)
-		% break
+		title(strcat('data/elevation/',directory, '/', file.name))
 	end
-	% break
 end
 	% files = dted('data/elevation')
 
