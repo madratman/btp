@@ -8,6 +8,7 @@ function [f] = generate_aj3(A1, a1, B1, b1)
 xtdot = 1
 syms x y;
 f = [];
+curr_time = datestr(now, 30)
 for alphat = -3.14:0.0628:3.14
  for xt = 0:0.1:10
      for yt = 0:0.1:10
@@ -200,24 +201,24 @@ nz4 = -fz4;
 
  % Doubt : How?
  
-tz1 = -(ny1*s3*c1-ny1*c3*s2*s1+nx1*c3*c1+nx1*s3*s2*s1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
+% tz1 = -(ny1*s3*c1-ny1*c3*s2*s1+nx1*c3*c1+nx1*s3*s2*s1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
  
-tz2 = -(ny2*s3*c1-ny2*c3*s2*s1+nx2*c3*c1+nx2*s3*s2*s1)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
+% tz2 = -(ny2*s3*c1-ny2*c3*s2*s1+nx2*c3*c1+nx2*s3*s2*s1)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
  
-tz3 = -(ny3*s3*c1-ny3*c3*s2*s1+nx3*c3*c1+nx3*s3*s2*s1)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
+% tz3 = -(ny3*s3*c1-ny3*c3*s2*s1+nx3*c3*c1+nx3*s3*s2*s1)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
 
-tz4 = -(ny4*s3*c1-ny4*c3*s2*s1+nx4*c3*c1+nx4*s3*s2*s1)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
-tx1 =((c3*c1+s3*s2*s1)*nz1-c2*s1*ny1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
-ty1 = (c2*s1*nx1-(-s3*c1+c3*s2*s1)*nz1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
+% tz4 = -(ny4*s3*c1-ny4*c3*s2*s1+nx4*c3*c1+nx4*s3*s2*s1)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
+% tx1 =((c3*c1+s3*s2*s1)*nz1-c2*s1*ny1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
+% ty1 = (c2*s1*nx1-(-s3*c1+c3*s2*s1)*nz1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
 
-tx2 = ((c3*c1+s3*s2*s1)*nz2-c2*s1*ny2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
-ty2 =(c2*s1*nx2-(-s3*c1+c3*s2*s1)*nz2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
+% tx2 = ((c3*c1+s3*s2*s1)*nz2-c2*s1*ny2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
+% ty2 =(c2*s1*nx2-(-s3*c1+c3*s2*s1)*nz2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
 
-tx3 =((c3*c1+s3*s2*s1)*nz3-c2*s1*ny3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
-ty3 = (c2*s1*nx3-(-s3*c1+c3*s2*s1)*nz3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
+% tx3 =((c3*c1+s3*s2*s1)*nz3-c2*s1*ny3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
+% ty3 = (c2*s1*nx3-(-s3*c1+c3*s2*s1)*nz3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
 
-tx4 =((c3*c1+s3*s2*s1)*nz4-c2*s1*ny4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
-ty4 =(c2*s1*nx4-(-s3*c1+c3*s2*s1)*nz4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
+% tx4 =((c3*c1+s3*s2*s1)*nz4-c2*s1*ny4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
+% ty4 =(c2*s1*nx4-(-s3*c1+c3*s2*s1)*nz4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
 
 
 
@@ -289,14 +290,16 @@ r86 = DD(8,5);
 
 
 g = [xt,yt,alphat,xtdot,r23,r43,r63,r83];
-f = [f;g];
+
+% f = [f;g];
 
 % disp (f);
 % disp(xt); 
 % disp(yt);
 % disp(alphat);
 % disp(xtdot);
- var = [xt, yt, alphat, xtdot];
+dlmwrite(strcat('data/csvlist_', num2str(A1), '-', num2str(a1), '-', num2str(B1), '-', num2str(b1), '-', curr_time, '.dat'), g, '-append');
+ % var = [xt, yt, alphat, xtdot];
  % disp(sprintf('current inputs are : (%d, %d, %d, %d)', var));
 
 
@@ -304,7 +307,6 @@ f = [f;g];
         end
  end
 
-csvwrite(strcat('data/csvlist_', num2str(A1), '-', num2str(a1), '-', num2str(B1), '-', num2str(b1), '-', datestr(now, 30), '.dat'),f);
 % type csvlist.dat;
 
 % final = zeros(max(L),4);
