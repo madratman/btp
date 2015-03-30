@@ -65,6 +65,7 @@ for u=t0:t_f,
     	if (x_curr >= 0) && (x_curr <= 10) && (y_curr >= 0) && (y_curr <= 10)
 	    	alpha_curr = double(subs(alpha, t, u));
     		aj3_curr = interp_aj3{i}(x_curr, y_curr, alpha_curr);
+            % for aj3 >= 0.1  0 -(aj3 - 0.1) <= 0
 	   	else
     		aj3_curr = 0;
         end

@@ -1,7 +1,7 @@
 function f = objective(req_coeff);
 %NOT IMPLEMENTED
 %test with constant
-f = 10; % use constant objective for feasibilty test
+% f = 10; % use constant objective for feasibilty test
 
 req_coeff;
 t0 = 1;

@@ -20,12 +20,7 @@ b1_plot = 1.4;
 figure;
 z = A1_plot*sin(a1_plot*x) + B1_plot*cos(b1_plot*y);	
 p1 = ezplot3(x,y,z, [1, 10]);%plots traj 
-% p1.Color = 'white';
-% set(p1, 'Color', red);
-set(p1,'color','w','LineWidth',4)
-
-% p1.LineStyle = '--';
-% p1.LineWidth = 15;
+set(p1,'color','w','LineWidth',4);
 
 hold on;
 [x_plot,y_plot] = meshgrid(0:.1:10);

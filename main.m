@@ -13,7 +13,8 @@ a = rand(12, 1);
 % req_coeff = fmincon(@obj,a,[],[],[],[],[],[],@nonlcon);
 global interp_aj3;
 for i = 1:4
-	interp_aj3{i} = importdata(strcat('data/a', int2str(i), '3-interpolant.dat'));
+% 	interp_aj3{i} = importdata(strcat('data/a', int2str(i), '3-interpolant.dat'));
+%     interp_aj3{i} = importdata(strcat('data/a', int2str(i), '3-interpolant-1.75-1.5-1.75-0.75.dat'));
 end
 coeff = [coeffa0; coeffa1];
 req_coeff = fmincon(@objective,a,[],[],[],[],[],[],@nonlcon)
@@ -23,6 +24,6 @@ data = importdata('data/x-y.dat');
 x = data(1)
 y = data(2)
 X = [x; y];
-save(strcat('data/x-y-', datestr(now, 30), '.dat'), 'X');
+save(strcat('data/x-y-1.5-1.2-1.75-1.4-', datestr(now, 30), '.dat'), 'X');
 
 % call results, save plots, (and x, y, alpha, z functions)
