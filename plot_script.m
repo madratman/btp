@@ -11,10 +11,11 @@ syms t;
 % B1_plot = 3.5*0.50;
 % b1_plot = 0.50;
 %%%%%%%%%%%%%
-A1_plot = 1.5;
-a1_plot = 1.2;
+
+A1_plot = 1.75;
+a1_plot = 1.5;
 B1_plot = 1.75;
-b1_plot = 1.4;
+b1_plot = 0.75;
 
 % h(1) = figure;
 figure;

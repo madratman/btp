@@ -73,6 +73,7 @@ for u=t0:t_f,
     end
     c = [c; -x_curr; -y_curr; x_curr - 10; y_curr - 10;];   % multiply by -1 coz c<0
 end
+% c
 % %make x y and alpha as anon func?
 % %Anonymous functions return just one output.
 % % So how can you write an anonymous function as a nonlinear constraint?
