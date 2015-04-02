@@ -50,8 +50,9 @@ l = 0.4;
 
 
 % k3 = subs(terrain_eqn, [x, y], [xt, yt]);
-k3 = A1*cos(a1*xt)+B1*sin(b1*yt)-(-A1*a1*sin(a1*xt)*xt+B1*b1*cos(b1*yt)*yt);
-% error. This is WRONG (7). k3 = A1*cos(a1*xt)+B1*sin(b1*yt)
+%k3 = A1*cos(a1*xt)+B1*sin(b1*yt)-(-A1*a1*sin(a1*xt)*xt+B1*b1*cos(b1*yt)*yt);
+% error. This is WRONG (7). k3 = A1*cos(a1*xt)+B1*sin(b1*yt). Check equation no 7 in the paper. 
+k3 = A1*cos(a1*xt)+B1*sin(b1*yt)
 
 k1 = -A1*a1*sin(a1*xt);
 
