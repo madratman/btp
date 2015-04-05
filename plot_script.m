@@ -19,6 +19,7 @@ b1_plot = 0.75;
 
 % h(1) = figure;
 figure;
+axis equal;
 z = A1_plot*sin(a1_plot*x) + B1_plot*cos(b1_plot*y);	
 p1 = ezplot3(x,y,z, [1, 10]);%plots traj 
 % p1.Color = 'white';

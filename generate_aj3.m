@@ -6,7 +6,6 @@
 % xtdot = inp(4); %try to eliminate the dependency 
 
 xtdot = 1
-syms x y;
 f = [];
 curr_time = datestr(now, 30)
 counter = 1;
@@ -64,275 +63,278 @@ k1 = (33230243813133175*xt^9)/316912650057057350374175801344 + (7996763607244269
 % k2 = B1*b1*cos(b1*yt);
 k2 = (8885292896938077*xt^9)/5070602400912917605986812821504 + (8538511678414161*xt^8*yt)/633825300114114700748351602688 - (5335599014481955*xt^8)/2475880078570760549798248448 + (2419560649117413*xt^7*yt^2)/158456325028528675187087900672 - (5189368725781631*xt^7*yt)/618970019642690137449562112 + (2044645103490377*xt^7)/2417851639229258349412352 + (3080297363795269*xt^6*yt^3)/79228162514264337593543950336 - (16266284652202209*xt^6*yt^2)/1237940039285380274899124224 + (2899561632529087*xt^6*yt)/1208925819614629174706176 - (3125001407714437*xt^6)/18889465931478580854784 - (19007907698817575*xt^5*yt^4)/633825300114114700748351602688 - (4571528645104093*xt^5*yt^3)/618970019642690137449562112 + (14425269863431995*xt^5*yt^2)/4835703278458516698824704 - (3460686879495541*xt^5*yt)/9444732965739290427392 + (2719376213018457*xt^5)/147573952589676412928 + (5978680716746631*xt^4*yt^5)/158456325028528675187087900672 + (25827572647360975*xt^4*yt^4)/79228162514264337593543950336 + (4804905730873281*xt^4*yt^3)/9671406556917033397649408 - (10255487680225539*xt^4*yt^2)/37778931862957161709568 + (8735848059808043*xt^4*yt)/295147905179352825856 - (5505985074099667*xt^4)/4611686018427387904 - (62980281322019145*xt^3*yt^6)/2535301200456458802993406410752 - (5315105647913565*xt^3*yt^5)/1237940039285380274899124224 + (2776618085326715*xt^3*yt^4)/2417851639229258349412352 - (7949821880523047*xt^3*yt^3)/75557863725914323419136 + (8255722817393673*xt^3*yt^2)/590295810358705651712 - (5733825012207603*xt^3*yt)/4611686018427387904 + (6198209524134923*xt^3)/144115188075855872 - (4702302799241693*xt^2*yt^7)/20282409603651670423947251286016 + (17408036302796069*xt^2*yt^6)/2475880078570760549798248448 - (21009190566138387*xt^2*yt^5)/19342813113834066795298816 + (43876024009702875*xt^2*yt^4)/4835703278458516698824704 + (1782900655996695*xt^2*yt^3)/295147905179352825856 - (4710519326271813*xt^2*yt^2)/9223372036854775808 + (995828493769777*xt^2*yt)/36028797018963968 - (1752978533922223*xt^2)/2251799813685248 - (35337017205331335*xt*yt^8)/81129638414606681695789005144064 + (3477342435423015*xt*yt^7)/2475880078570760549798248448 - (22106164729806395*xt*yt^6)/19342813113834066795298816 + (9662681276146251*xt*yt^5)/37778931862957161709568 - (7291180614769255*xt*yt^4)/295147905179352825856 + (5359339437996547*xt*yt^3)/4611686018427387904 - (14926577599849713*xt*yt^2)/576460752303423488 + (5192201025591889*xt*yt)/36028797018963968 + (2276460497426757*xt)/562949953421312 - (16729884348371485*yt^9)/79228162514264337593543950336 + (74442843797141403*yt^8)/618970019642690137449562112 - (4382107944941979*yt^7)/151115727451828646838272 + (36440157539075885*yt^6)/9444732965739290427392 - (11405570221460049*yt^5)/36893488147419103232 + (35167459057014635*yt^4)/2305843009213693952 - (8170610142300893*yt^3)/18014398509481984 + (17104202306066073*yt^2)/2251799813685248 - (2172183660950817*yt)/35184372088832 + 2892389696795307/17592186044416;
 
-gamma = k2*cos(alphat)-k1*sin(alphat);
+k3 = double(k3);
+k1 = double(k1);
+k2 = double(k2);
+ gamma = double(k2*cos(alphat)-k1*sin(alphat));
 
 beta = -k1*cos(alphat)-k2*sin(alphat);
 %to check. f2 and f3. eqn (15)
 
 
-vel1 = xtdot/(cos(alphat)*cos(beta));
+% vel1 = xtdot/(cos(alphat)*cos(beta));
 %kya? (out of aukat)
 
-p1 = k1*l*sin(alphat)-k2*l*cos(alphat);
+p1 = (k1*l*sin(alphat))- (k2*l*cos(alphat));     
 
-q1 = k1*l*cos(alphat)+k2*l*sin(alphat);
+q1 = k1*l*cos(alphat)+ k2*l*sin(alphat);
 
 zt = 2*k1*w*sin(alphat)-2*k2*w*cos(alphat)-k1^2*l+2*k1^2*l*cos(alphat)^2+4*k1*l*sin(alphat)*k2*cos(alphat)-2*k2^2*l*cos(alphat)^2+k2^2*l+k1*xt+k2*yt+k3+l;
  % f1. BHAI! CHECK THIS DERIVATION. SOLVE EQUATION (15)
 
-xc1 = xt - w*sin(alphat)-l*sin(alphat)*gamma-h*cos(alphat)-l*cos(alphat)*beta;
+xc1 = double(xt - w*sin(alphat)-l*sin(alphat)*gamma-h*cos(alphat)-l*cos(alphat)*beta);
 %ERROR . eqn 6 says for i =1 , del = +1, shouldn't it be "+h* beta"?
 
-yc1 = yt-h*sin(alphat)-l*sin(alphat)*beta+w*cos(alphat)+l*cos(alphat)*gamma;
+yc1 = double(yt-h*sin(alphat)-l*sin(alphat)*beta+w*cos(alphat)+l*cos(alphat)*gamma);
 
 
 zc1 = zt+h*beta-l+w*gamma;
 %ERROR . eqn 6 says for i =1 , del = +1, shouldn't it be "+h* beta"?
 
-X1 = xc1;
-Y1 = yc1;
-Z1 = zc1;
+% X1 = xc1;
+% Y1 = yc1;
+% Z1 = zc1;
+% 
+% %fxi's are contact normals, ERROR
+% 
+% % fx1 = -A1*sin(a1*X1)*a1/(1+A1^2*sin(a1*X1)^2*a1^2+A1^2*cos(b1*Y1)^2*b1^2)^(1/2);
+% % fx1 = -a1*A1*sin(a1*X1)/(1 + ((a1*A1*sin(a1*X1))^2) + ((b1*B1*cos(b1*Y1)^2)))^(1/2);
 
-%fxi's are contact normals, ERROR
-
-% fx1 = -A1*sin(a1*X1)*a1/(1+A1^2*sin(a1*X1)^2*a1^2+A1^2*cos(b1*Y1)^2*b1^2)^(1/2);
-% fx1 = -a1*A1*sin(a1*X1)/(1 + ((a1*A1*sin(a1*X1))^2) + ((b1*B1*cos(b1*Y1)^2)))^(1/2);
-
-k1w1 = subs(k1, {xt,yt}, {xc1, yc1});
-k2w1 = subs(k2, {xt,yt}, {xc1, yc1});
-fx1 = k1w1/((1 + (k1w1^2) + (k2w1^2))^(1/2));
-fy1 = k2w1/((1 + (k1w1^2) + (k2w1^2))^(1/2));
-fz1 = -1/((1 + (k1w1^2) + (k2w1^2))^(1/2));
-
- 
- 
-% fy1 = A1*cos(b1*Y1)*b1/(1+A1^2*sin(a1*X1)^2*a1^2+A1^2*cos(b1*Y1)^2*b1^2)^(1/2);
-% fy1 = b1*B1*cos(a1*X1)/(1 + ((a1*A1*sin(a1*X1))^2) + ((b1*B1*cos(b1*Y1)^2)))^(1/2);
-% should have been cos(b1*Y1)
- 
-% fz1 = -1/(1+A1^2*sin(a1*X1)^2*a1^2+A1^2*cos(b1*Y1)^2*b1^2)^(1/2);
-% fz1 = -1 / (1 + ((a1*A1*sin(a1*X1))^2) + ((b1*B1*cos(b1*Y1)^2)))^(1/2);
- 
-xc2 = xt-w*sin(alphat)-l*sin(alphat)*gamma+h*cos(alphat)-l*cos(alphat)*beta;
-yc2 = yt+h*sin(alphat)-l*sin(alphat)*beta+w*cos(alphat)+l*cos(alphat)*gamma;
-
-zc2 = zt-h*beta-l+w*gamma;
-X2 = xc2;
-Y2 = yc2;
-Z2 = zc2;
-
-
-
-% fx2 = -A1*sin(a1*X2)*a1/(1 + ((a1*A1*sin(a1*X2))^2) + ((b1*B1*cos(b1*Y2)^2)))^(1/2) ;
- 
- 
- 
-% fy2 = B1*cos(b1*Y2)*b1/(1 + ((a1*A1*sin(a1*X2))^2) + ((b1*B1*cos(b1*Y2)^2)))^(1/2) ;
- 
- 
- 
-% fz2 = -1/(1 + ((a1*A1*sin(a1*X2))^2) + ((b1*B1*cos(b1*Y2)^2)))^(1/2) ;
-k1w2 = subs(k1, {xt,yt}, {xc2, yc2});
-k2w2 = subs(k2, {xt,yt}, {xc2, yc2});
-fx2 = k1w2/((1 + (k1w2^2) + (k2w2^2))^(1/2));
-fy2 = k2w2/((1 + (k1w2^2) + (k2w2^2))^(1/2));
-fz2 = -1/((1 + (k1w2^2) + (k2w2^2))^(1/2));
+k1w1 = double(subs(k1, {xt,yt}, {xc1, yc1}));
+k2w1 = double(subs(k2, {xt,yt}, {xc1, yc1}));
+fx1 = double(k1w1/((1 + (k1w1^2) + (k2w1^2))^(1/2)));
+fy1 = double(k2w1/((1 + (k1w1^2) + (k2w1^2))^(1/2)));
+fz1 = double(-1/((1 + (k1w1^2) + (k2w1^2))^(1/2)));
 
  
  
-xc3 = xt+w*sin(alphat)-l*sin(alphat)+h*cos(alphat)-l*cos(alphat)*beta;
-yc3 = yt+h*sin(alphat)-l*sin(alphat)*beta-w*cos(alphat)+l*cos(alphat)*gamma;
-
-zc3 = zt-h*beta-l-w*gamma;
-
-
-X3 = xc3;
-Y3 = yc3;
-Z3 = zc3;
-
-% fx3 = -A1*sin(a1*X3)*a1/(1 + ((a1*A1*sin(a1*X3))^2) + ((b1*B1*cos(b1*Y3)^2)))^(1/2) ;
- 
- 
- 
-% fy3 = B1*cos(b1*Y3)*b1/(1 + ((a1*A1*sin(a1*X3))^2) + ((b1*B1*cos(b1*Y3)^2)))^(1/2) ;
- 
- 
- 
-% fz3 = -1/(1 + ((a1*A1*sin(a1*X3))^2) + ((b1*B1*cos(b1*Y3)^2)))^(1/2) ;
-
-k1w3 = subs(k1, {xt,yt}, {xc3, yc3});
-k2w3 = subs(k2, {xt,yt}, {xc3, yc3});
-fx3 = k1w3/((1 + (k1w3^2) + (k2w3^2))^(1/2));
-fy3 = k2w3/((1 + (k1w3^2) + (k2w3^2))^(1/2));
-fz3 = -1/((1 + (k1w3^2) + (k2w3^2))^(1/2));
-
- 
- 
- 
-xc4 = xt+w*sin(alphat)-l*sin(alphat)*gamma-h*cos(alphat)-l*cos(alphat)*beta;
-
-yc4 = yt-h*sin(alphat)-l*sin(alphat)*beta-w*cos(alphat)+l*cos(alphat)*gamma;
-
-zc4 = zt+h*sin(beta)-l-w*gamma;
-
-
-X4 = xc4;
-Y4 = yc4;
-Z4 = zc4;
-
-% fx4 = -A1*sin(a1*X4)*a1/(1 + ((a1*A1*sin(a1*X4))^2) + ((b1*B1*cos(b1*Y4)^2)))^(1/2) ;
- 
- 
- 
-% fy4 = B1*cos(b1*Y4)*b1/(1 + ((a1*A1*sin(a1*X4))^2) + ((b1*B1*cos(b1*Y4)^2)))^(1/2) ;
- 
- 
- 
-% fz4 = -1/(1 + ((a1*A1*sin(a1*X4))^2) + ((b1*B1*cos(b1*Y4)^2)))^(1/2) ;
-
-k1w4 = subs(k1, {xt,yt}, {xc4, yc4});
-k2w4 = subs(k2, {xt,yt}, {xc4, yc4});
-fx4 = k1w4/((1 + (k1w4^2) + (k2w4^2))^(1/2));
-fy4 = k2w4/((1 + (k1w4^2) + (k2w4^2))^(1/2));
-fz4 = -1/((1 + (k1w4^2) + (k2w4^2))^(1/2))
-
- 
- 
-
-
-c1=cos(gamma);
-c2=cos(beta);
-c3=cos(alphat);
-
-s1=sin(gamma);
-s2=sin(beta);
-s3=sin(alphat);
-
-%ERROR : why negate fz1 ?!
-nx1 = fx1;
-ny1 = fy1;
-nz1 = -fz1;
-
-
-nx2 = fx2;
-ny2 = fy2;
-nz2 = -fz2;
-
-
-
-nx3 = fx3;
-ny3 = fy3;
-nz3 = -fz3;
-
-
-
-nx4 = fx4;
-ny4 = fy4;
-nz4 = -fz4;
-
- % Doubt : How?
- 
-% tz1 = -(ny1*s3*c1-ny1*c3*s2*s1+nx1*c3*c1+nx1*s3*s2*s1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
- 
-% tz2 = -(ny2*s3*c1-ny2*c3*s2*s1+nx2*c3*c1+nx2*s3*s2*s1)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
- 
-% tz3 = -(ny3*s3*c1-ny3*c3*s2*s1+nx3*c3*c1+nx3*s3*s2*s1)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
-
-% tz4 = -(ny4*s3*c1-ny4*c3*s2*s1+nx4*c3*c1+nx4*s3*s2*s1)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
-% tx1 =((c3*c1+s3*s2*s1)*nz1-c2*s1*ny1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
-% ty1 = (c2*s1*nx1-(-s3*c1+c3*s2*s1)*nz1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
-
-% tx2 = ((c3*c1+s3*s2*s1)*nz2-c2*s1*ny2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
-% ty2 =(c2*s1*nx2-(-s3*c1+c3*s2*s1)*nz2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
-
-% tx3 =((c3*c1+s3*s2*s1)*nz3-c2*s1*ny3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
-% ty3 = (c2*s1*nx3-(-s3*c1+c3*s2*s1)*nz3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
-
-% tx4 =((c3*c1+s3*s2*s1)*nz4-c2*s1*ny4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
-% ty4 =(c2*s1*nx4-(-s3*c1+c3*s2*s1)*nz4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
-
-
-
-DD = opttraj_coef([alphat,beta,gamma,fx1,fy1,fz1,fx2,fy2,fz2,fx3,fy3,fz3,fx4,fy4,fz4,xt,yt]);
-
-r23 = DD(2,2); %%% for wheel 1
-
-r43 = DD(4,2);  %%% for wheel 2
-
-r63 = DD(6,2);  %%% for wheel 3
-
-r83 = DD(8,2);  %%% for wheel 4
-
-% r11 = DD(1,1);
-r12 = DD(1,1);
-r13 = DD(1,2);
-r14 = DD(1,3);
-r15 = DD(1,4);
-r16 = DD(1,5);
-
-% r21 = DD(2,1);
-r22 = DD(2,1);
-r23 = DD(2,2);
-r24 = DD(2,3);
-r25 = DD(2,4);
-r26 = DD(2,5);
-
-% r31 = DD(3,1);
-r32 = DD(3,1);
-r33 = DD(3,2);
-r34 = DD(3,3);
-r35 = DD(3,4);
-r36 = DD(3,5);
-
-% r41 = DD(4,1);
-r42 = DD(4,1);
-r43 = DD(4,2);
-r44 = DD(4,3);
-r45 = DD(4,4);
-r46 = DD(4,5);
-
-% r51 = DD(5,1);
-r52 = DD(5,1);
-r53 = DD(5,2);
-r54 = DD(5,3);
-r55 = DD(5,4);
-r56 = DD(5,5);
-
-% r61 = DD(6,1);
-r62 = DD(6,1);
-r63 = DD(6,2);
-r64 = DD(6,3);
-r65 = DD(6,4);
-r66 = DD(6,5);
-
-% r71 = DD(7,1);
-r72 = DD(7,1);
-r73 = DD(7,2);
-r74 = DD(7,3);
-r75 = DD(7,4);
-r76 = DD(7,5);
-
-% r81 = DD(8,1);
-r82 = DD(8,1);
-r83 = DD(8,2);
-r84 = DD(8,3);
-r85 = DD(8,4);
-r86 = DD(8,5);
-
-
-g = [xt,yt,alphat,xtdot,r23,r43,r63,r83];
-
-% f = [f;g];
-
-% disp (f);
-% disp(xt); 
-% disp(yt);
-% disp(alphat);
-% disp(xtdot);
-dlmwrite(strcat('data/csvlist_e068_n29', num2str(A1), '-', num2str(a1), '-', num2str(B1), '-', num2str(b1), '-', curr_time, '.dat'), g, '-append');
- % var = [xt, yt, alphat, xtdot];
- % disp(sprintf('current inputs are : (%d, %d, %d, %d)', var));
-
+% % fy1 = A1*cos(b1*Y1)*b1/(1+A1^2*sin(a1*X1)^2*a1^2+A1^2*cos(b1*Y1)^2*b1^2)^(1/2);
+% % fy1 = b1*B1*cos(a1*X1)/(1 + ((a1*A1*sin(a1*X1))^2) + ((b1*B1*cos(b1*Y1)^2)))^(1/2);
+% % should have been cos(b1*Y1)
+%  
+% % fz1 = -1/(1+A1^2*sin(a1*X1)^2*a1^2+A1^2*cos(b1*Y1)^2*b1^2)^(1/2);
+% % fz1 = -1 / (1 + ((a1*A1*sin(a1*X1))^2) + ((b1*B1*cos(b1*Y1)^2)))^(1/2);
+%  
+% xc2 = xt-w*sin(alphat)-l*sin(alphat)*gamma+h*cos(alphat)-l*cos(alphat)*beta;
+% yc2 = yt+h*sin(alphat)-l*sin(alphat)*beta+w*cos(alphat)+l*cos(alphat)*gamma;
+% 
+% zc2 = zt-h*beta-l+w*gamma;
+% X2 = xc2;
+% Y2 = yc2;
+% Z2 = zc2;
+% 
+% 
+% 
+% % fx2 = -A1*sin(a1*X2)*a1/(1 + ((a1*A1*sin(a1*X2))^2) + ((b1*B1*cos(b1*Y2)^2)))^(1/2) ;
+%  
+%  
+%  
+% % fy2 = B1*cos(b1*Y2)*b1/(1 + ((a1*A1*sin(a1*X2))^2) + ((b1*B1*cos(b1*Y2)^2)))^(1/2) ;
+%  
+%  
+%  
+% % fz2 = -1/(1 + ((a1*A1*sin(a1*X2))^2) + ((b1*B1*cos(b1*Y2)^2)))^(1/2) ;
+% k1w2 = subs(k1, {xt,yt}, {xc2, yc2});
+% k2w2 = subs(k2, {xt,yt}, {xc2, yc2});
+% fx2 = k1w2/((1 + (k1w2^2) + (k2w2^2))^(1/2));
+% fy2 = k2w2/((1 + (k1w2^2) + (k2w2^2))^(1/2));
+% fz2 = -1/((1 + (k1w2^2) + (k2w2^2))^(1/2));
+% 
+%  
+%  
+% xc3 = xt+w*sin(alphat)-l*sin(alphat)+h*cos(alphat)-l*cos(alphat)*beta;
+% yc3 = yt+h*sin(alphat)-l*sin(alphat)*beta-w*cos(alphat)+l*cos(alphat)*gamma;
+% 
+% zc3 = zt-h*beta-l-w*gamma;
+% 
+% 
+% X3 = xc3;
+% Y3 = yc3;
+% Z3 = zc3;
+% 
+% % fx3 = -A1*sin(a1*X3)*a1/(1 + ((a1*A1*sin(a1*X3))^2) + ((b1*B1*cos(b1*Y3)^2)))^(1/2) ;
+%  
+%  
+%  
+% % fy3 = B1*cos(b1*Y3)*b1/(1 + ((a1*A1*sin(a1*X3))^2) + ((b1*B1*cos(b1*Y3)^2)))^(1/2) ;
+%  
+%  
+%  
+% % fz3 = -1/(1 + ((a1*A1*sin(a1*X3))^2) + ((b1*B1*cos(b1*Y3)^2)))^(1/2) ;
+% 
+% k1w3 = subs(k1, {xt,yt}, {xc3, yc3});
+% k2w3 = subs(k2, {xt,yt}, {xc3, yc3});
+% fx3 = k1w3/((1 + (k1w3^2) + (k2w3^2))^(1/2));
+% fy3 = k2w3/((1 + (k1w3^2) + (k2w3^2))^(1/2));
+% fz3 = -1/((1 + (k1w3^2) + (k2w3^2))^(1/2));
+% 
+%  
+%  
+%  
+% xc4 = xt+w*sin(alphat)-l*sin(alphat)*gamma-h*cos(alphat)-l*cos(alphat)*beta;
+% 
+% yc4 = yt-h*sin(alphat)-l*sin(alphat)*beta-w*cos(alphat)+l*cos(alphat)*gamma;
+% 
+% zc4 = zt+h*sin(beta)-l-w*gamma;
+% 
+% 
+% X4 = xc4;
+% Y4 = yc4;
+% Z4 = zc4;
+% 
+% % fx4 = -A1*sin(a1*X4)*a1/(1 + ((a1*A1*sin(a1*X4))^2) + ((b1*B1*cos(b1*Y4)^2)))^(1/2) ;
+%  
+%  
+%  
+% % fy4 = B1*cos(b1*Y4)*b1/(1 + ((a1*A1*sin(a1*X4))^2) + ((b1*B1*cos(b1*Y4)^2)))^(1/2) ;
+%  
+%  
+%  
+% % fz4 = -1/(1 + ((a1*A1*sin(a1*X4))^2) + ((b1*B1*cos(b1*Y4)^2)))^(1/2) ;
+% 
+% k1w4 = double(subs(k1, {xt,yt}, {xc4, yc4}));
+% k2w4 = double(subs(k2, {xt,yt}, {xc4, yc4}));
+% fx4 = double(k1w4/((1 + (k1w4^2) + (k2w4^2))^(1/2)));
+% fy4 = double(k2w4/((1 + (k1w4^2) + (k2w4^2))^(1/2)));
+% fz4 = double(-1/((1 + (k1w4^2) + (k2w4^2))^(1/2)));
+% 
+%  
+%  
+% 
+% 
+% c1=cos(gamma);
+% c2=cos(beta);
+% c3=cos(alphat);
+% 
+% s1=sin(gamma);
+% s2=sin(beta);
+% s3=sin(alphat);
+% 
+% %ERROR : why negate fz1 ?!
+% nx1 = fx1;
+% ny1 = fy1;
+% nz1 = -fz1;
+% 
+% 
+% nx2 = fx2;
+% ny2 = fy2;
+% nz2 = -fz2;
+% 
+% 
+% 
+% nx3 = fx3;
+% ny3 = fy3;
+% nz3 = -fz3;
+% 
+% 
+% 
+% nx4 = fx4;
+% ny4 = fy4;
+% nz4 = -fz4;
+% 
+%  % Doubt : How?
+%  
+% % tz1 = -(ny1*s3*c1-ny1*c3*s2*s1+nx1*c3*c1+nx1*s3*s2*s1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
+%  
+% % tz2 = -(ny2*s3*c1-ny2*c3*s2*s1+nx2*c3*c1+nx2*s3*s2*s1)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
+%  
+% % tz3 = -(ny3*s3*c1-ny3*c3*s2*s1+nx3*c3*c1+nx3*s3*s2*s1)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
+% 
+% % tz4 = -(ny4*s3*c1-ny4*c3*s2*s1+nx4*c3*c1+nx4*s3*s2*s1)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
+% % tx1 =((c3*c1+s3*s2*s1)*nz1-c2*s1*ny1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
+% % ty1 = (c2*s1*nx1-(-s3*c1+c3*s2*s1)*nz1)/(nz1^2*c3^2*c1^2-2*nz1*c3*c1*c2*s1*ny1+nz1^2*s3^2*s2^2*s1^2-2*nz1*s3*s2*s1^2*c2*ny1+c2^2*s1^2*ny1^2+c2^2*s1^2*nx1^2+2*c2*s1*nx1*nz1*s3*c1-2*c2*s1^2*nx1*nz1*c3*s2+nz1^2*s3^2*c1^2+nz1^2*c3^2*s2^2*s1^2+ny1^2*s3^2*c1^2-2*ny1^2*s3*c1*c3*s2*s1+2*ny1*s3*c1^2*nx1*c3+2*ny1*s3^2*c1*nx1*s2*s1+ny1^2*c3^2*s2^2*s1^2-2*ny1*c3^2*s2*s1*nx1*c1-2*ny1*c3*s2^2*s1^2*nx1*s3+nx1^2*c3^2*c1^2+2*nx1^2*c3*c1*s3*s2*s1+nx1^2*s3^2*s2^2*s1^2)^(1/2);
+% 
+% % tx2 = ((c3*c1+s3*s2*s1)*nz2-c2*s1*ny2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
+% % ty2 =(c2*s1*nx2-(-s3*c1+c3*s2*s1)*nz2)/(nz2^2*c3^2*c1^2-2*nz2*c3*c1*c2*s1*ny2+nz2^2*s3^2*s2^2*s1^2-2*nz2*s3*s2*s1^2*c2*ny2+c2^2*s1^2*ny2^2+c2^2*s1^2*nx2^2+2*c2*s1*nx2*nz2*s3*c1-2*c2*s1^2*nx2*nz2*c3*s2+nz2^2*s3^2*c1^2+nz2^2*c3^2*s2^2*s1^2+ny2^2*s3^2*c1^2-2*ny2^2*s3*c1*c3*s2*s1+2*ny2*s3*c1^2*nx2*c3+2*ny2*s3^2*c1*nx2*s2*s1+ny2^2*c3^2*s2^2*s1^2-2*ny2*c3^2*s2*s1*nx2*c1-2*ny2*c3*s2^2*s1^2*nx2*s3+nx2^2*c3^2*c1^2+2*nx2^2*c3*c1*s3*s2*s1+nx2^2*s3^2*s2^2*s1^2)^(1/2);
+% 
+% % tx3 =((c3*c1+s3*s2*s1)*nz3-c2*s1*ny3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
+% % ty3 = (c2*s1*nx3-(-s3*c1+c3*s2*s1)*nz3)/(nz3^2*c3^2*c1^2-2*nz3*c3*c1*c2*s1*ny3+nz3^2*s3^2*s2^2*s1^2-2*nz3*s3*s2*s1^2*c2*ny3+c2^2*s1^2*ny3^2+c2^2*s1^2*nx3^2+2*c2*s1*nx3*nz3*s3*c1-2*c2*s1^2*nx3*nz3*c3*s2+nz3^2*s3^2*c1^2+nz3^2*c3^2*s2^2*s1^2+ny3^2*s3^2*c1^2-2*ny3^2*s3*c1*c3*s2*s1+2*ny3*s3*c1^2*nx3*c3+2*ny3*s3^2*c1*nx3*s2*s1+ny3^2*c3^2*s2^2*s1^2-2*ny3*c3^2*s2*s1*nx3*c1-2*ny3*c3*s2^2*s1^2*nx3*s3+nx3^2*c3^2*c1^2+2*nx3^2*c3*c1*s3*s2*s1+nx3^2*s3^2*s2^2*s1^2)^(1/2);
+% 
+% % tx4 =((c3*c1+s3*s2*s1)*nz4-c2*s1*ny4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
+% % ty4 =(c2*s1*nx4-(-s3*c1+c3*s2*s1)*nz4)/(nz4^2*c3^2*c1^2-2*nz4*c3*c1*c2*s1*ny4+nz4^2*s3^2*s2^2*s1^2-2*nz4*s3*s2*s1^2*c2*ny4+c2^2*s1^2*ny4^2+c2^2*s1^2*nx4^2+2*c2*s1*nx4*nz4*s3*c1-2*c2*s1^2*nx4*nz4*c3*s2+nz4^2*s3^2*c1^2+nz4^2*c3^2*s2^2*s1^2+ny4^2*s3^2*c1^2-2*ny4^2*s3*c1*c3*s2*s1+2*ny4*s3*c1^2*nx4*c3+2*ny4*s3^2*c1*nx4*s2*s1+ny4^2*c3^2*s2^2*s1^2-2*ny4*c3^2*s2*s1*nx4*c1-2*ny4*c3*s2^2*s1^2*nx4*s3+nx4^2*c3^2*c1^2+2*nx4^2*c3*c1*s3*s2*s1+nx4^2*s3^2*s2^2*s1^2)^(1/2);
+% 
+% 
+% 
+% DD = opttraj_coef([alphat,beta,gamma,fx1,fy1,fz1,fx2,fy2,fz2,fx3,fy3,fz3,fx4,fy4,fz4,xt,yt]);
+% 
+% r23 = DD(2,2); %%% for wheel 1
+% 
+% r43 = DD(4,2);  %%% for wheel 2
+% 
+% r63 = DD(6,2);  %%% for wheel 3
+% 
+% r83 = DD(8,2);  %%% for wheel 4
+% 
+% % r11 = DD(1,1);
+% r12 = DD(1,1);
+% r13 = DD(1,2);
+% r14 = DD(1,3);
+% r15 = DD(1,4);
+% r16 = DD(1,5);
+% 
+% % r21 = DD(2,1);
+% r22 = DD(2,1);
+% r23 = DD(2,2);
+% r24 = DD(2,3);
+% r25 = DD(2,4);
+% r26 = DD(2,5);
+% 
+% % r31 = DD(3,1);
+% r32 = DD(3,1);
+% r33 = DD(3,2);
+% r34 = DD(3,3);
+% r35 = DD(3,4);
+% r36 = DD(3,5);
+% 
+% % r41 = DD(4,1);
+% r42 = DD(4,1);
+% r43 = DD(4,2);
+% r44 = DD(4,3);
+% r45 = DD(4,4);
+% r46 = DD(4,5);
+% 
+% % r51 = DD(5,1);
+% r52 = DD(5,1);
+% r53 = DD(5,2);
+% r54 = DD(5,3);
+% r55 = DD(5,4);
+% r56 = DD(5,5);
+% 
+% % r61 = DD(6,1);
+% r62 = DD(6,1);
+% r63 = DD(6,2);
+% r64 = DD(6,3);
+% r65 = DD(6,4);
+% r66 = DD(6,5);
+% 
+% % r71 = DD(7,1);
+% r72 = DD(7,1);
+% r73 = DD(7,2);
+% r74 = DD(7,3);
+% r75 = DD(7,4);
+% r76 = DD(7,5);
+% 
+% % r81 = DD(8,1);
+% r82 = DD(8,1);
+% r83 = DD(8,2);
+% r84 = DD(8,3);
+% r85 = DD(8,4);
+% r86 = DD(8,5);
+% 
+% 
+% g = [xt,yt,alphat,xtdot,r23,r43,r63,r83];
+% 
+% % f = [f;g];
+% 
+% % disp (f);
+% % disp(xt); 
+% % disp(yt);
+% % disp(alphat);
+% % disp(xtdot);
+% dlmwrite(strcat('data/csvlist_e068_n29', curr_time, '.dat'), g, '-append');
+%  % var = [xt, yt, alphat, xtdot];
+%  % disp(sprintf('current inputs are : (%d, %d, %d, %d)', var));
+% 
 
             end
         end

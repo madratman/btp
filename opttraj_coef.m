@@ -420,37 +420,37 @@ abc31 = E4(1,1);
 
 abc32 = D4(1,1);
 
-abc33 = E1(2,1)
+abc33 = E1(2,1);
 
-abc34 = D1(2,1)
+abc34 = D1(2,1);
 
-abc35 = E2(2,1)
+abc35 = E2(2,1);
 
-abc36 = D2(2,1)
+abc36 = D2(2,1);
 
-abc37 = E3(2,1)
+abc37 = E3(2,1);
 
-abc38 = D3(2,1)
+abc38 = D3(2,1);
 
-abc39 = E4(2,1)
+abc39 = E4(2,1);
 
-abc40 = D4(2,1)
+abc40 = D4(2,1);
 
-abc41 = E1(3,1)
+abc41 = E1(3,1);
 
-abc42 = D1(3,1)
+abc42 = D1(3,1);
 
-abc43 = E2(3,1)
+abc43 = E2(3,1);
 
-abc44 = D2(3,1)
+abc44 = D2(3,1);
 
-abc45 = E3(3,1)
+abc45 = E3(3,1);
 
-abc46 = D3(3,1)
+abc46 = D3(3,1);
 
-abc47 = E4(3,1)
+abc47 = E4(3,1);
 
-abc48 = D4(3,1)
+abc48 = D4(3,1);
 
 XX1 = [
       abc9 abc10 abc11 abc12 abc13 abc14 abc15 abc16;
@@ -458,10 +458,11 @@ XX1 = [
      abc25 abc26 abc27 abc28 abc29 abc30 abc31 abc32;
      abc33 abc34 abc35 abc36 abc37 abc38 abc39 abc40;
         abc41 abc42 abc43 abc44 abc45 abc46 abc47 abc48
-     ]
+     ];
  
+XX1 = double(XX1);
 %  abc1 abc2 abc3 abc4 abc5 abc6 abc7 abc8;
- DD = pinv(XX1)
+ DD = pinv(XX1);
 % r11 = DD(1,1);
 r12 = DD(1,1);
 r13 = DD(1,2);
