@@ -24,7 +24,7 @@ pCell = num2cell(req_coeff);
 
 x = B0*x0 + B1*x1 + B2*x2 + B3*x3 + B4*x4 + B5*x5;
 k = B0*k0 + B1*k1 + B2*k2 + B3*k3 + B4*k4 + B5*k5;
-alpha = atan(k);
+alpha = atan(k)
 % req_coeff = [x0;x1;x2;x3;x4;x5;k0;k1;k2;k3;k4;k5];
 % everything should be in terms of "req_coeff", so we need the following
 % coeffais in the form of AA*reqcoeff(i) (as a product of a column and (req_coeff's) row
